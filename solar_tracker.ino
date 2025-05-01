@@ -3,10 +3,10 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-#define ONE_WIRE_BUS 13                // DS18B20 data wire is connected to input 2
+#define ONE_WIRE_BUS 13                
 
-OneWire oneWire(ONE_WIRE_BUS);        // create a oneWire instance to communicate with temperature IC
-DallasTemperature sensors(&oneWire);  // pass the oneWire reference to Dallas Temperature
+OneWire oneWire(ONE_WIRE_BUS);        
+DallasTemperature sensors(&oneWire);  
 
 LiquidCrystal lcd(8, 7, 6, 5, 4, 3);
 
@@ -118,23 +118,20 @@ lcd.print(current, 2);
 /*
 SICAKLIK ÖLÇÜMÜ
 sensors.requestTemperatures();
-  float temperatureC = sensors.getTempCByIndex(0); // Get temperature in Celsius
+  float temperatureC = sensors.getTempCByIndex(0); 
 
-  // Debug temperature on serial monitor
   Serial.print("Temperature (C): ");
   Serial.println(temperatureC);
 
-  // Display temperature in Celsius and Fahrenheit on the LCD
   if (temperatureC == DEVICE_DISCONNECTED_C) {
-    // Handle disconnected sensor case
     lcd.setCursor(0, 0);
     lcd.print("Sensor Error!");
     Serial.println("Error: Sensor disconnected!");
   } else {
     lcd.setCursor(0, 0);
     lcd.print("Temp: ");
-    lcd.print(temperatureC, 1); // Print Celsius with 1 decimal point
-    lcd.print((char)223);       // Degree symbol
+    lcd.print(temperatureC, 1); 
+    lcd.print((char)223);       
     lcd.print("C");
   }
 
