@@ -29,7 +29,7 @@ int ldr_right;
 int ldr_down;
 int ldr_left;
 
-int current_sensor = A4;
+int current_sensor = A7;
 
 void setup() {
   Serial.begin(9600);
@@ -71,12 +71,14 @@ void loop() {
  bool ustSwitch = digitalRead(sw1) == LOW;
  bool altSwitch = digitalRead(sw2) == LOW;
 
+
+
 // MOTOR KONTROL
-  if (ldr_left < ldr_right - 100) { 
+  if (ldr_left < ldr_right - 75) { 
     digitalWrite(m1p1, HIGH);
     digitalWrite(m1p2, LOW);
  
-  } else if (ldr_right < ldr_left  - 100) {
+  } else if (ldr_right < ldr_left  - 75) {
     digitalWrite(m1p1, LOW);
     digitalWrite(m1p2, HIGH);
   } else {
@@ -95,38 +97,31 @@ void loop() {
     digitalWrite(m2p2, LOW);
   }
 
-delay(1000);
 
-/* AKIM SENSÖRÜ 
+// AKIM SENSÖRÜ 
 int adc = analogRead(current_sensor);
-float voltage = adc*5/1023.0;
-float current = (voltage-2.5)/0.185;
-Serial.print("adc:");
-Serial.println(adc);
-Serial.print("volt:");
-Serial.println(voltage);
-Serial.print("Current:");
-Serial.println(current);
+float voltage = (adc*5/1023.0)-2.35;
+float current = (voltage)/0.185;
+if(current <= 0.001){
+  current = 0;
+}
+
 lcd.setCursor(0, 1);
 lcd.print("V:");
 lcd.print(voltage, 2); 
 lcd.setCursor(8, 1);
 lcd.print("I:");       
 lcd.print(current, 2);
-*/
 
-/*
-SICAKLIK ÖLÇÜMÜ
+
+//SICAKLIK ÖLÇÜMÜ
 sensors.requestTemperatures();
   float temperatureC = sensors.getTempCByIndex(0); 
 
-  Serial.print("Temperature (C): ");
-  Serial.println(temperatureC);
 
   if (temperatureC == DEVICE_DISCONNECTED_C) {
     lcd.setCursor(0, 0);
     lcd.print("Sensor Error!");
-    Serial.println("Error: Sensor disconnected!");
   } else {
     lcd.setCursor(0, 0);
     lcd.print("Temp: ");
@@ -135,7 +130,7 @@ sensors.requestTemperatures();
     lcd.print("C");
   }
 
-*/
+
 
 /*
 LCD İÇİN LDR DEĞERLERİ
@@ -147,7 +142,23 @@ LCD İÇİN LDR DEĞERLERİ
    lcd.setCursor(2, 1); lcd.print(ldr_down);
    lcd.setCursor(10, 1); lcd.print("    ");
    lcd.setCursor(10, 1); lcd.print(ldr_left);
+
+   Serial.print("SAĞ");
+Serial.println(ldr_right);
+Serial.print("SOL");
+Serial.println(ldr_left);
+Serial.print("SOL - SAĞ = ");
+Serial.println(ldr_left - ldr_right);
+
+Serial.print("U");
+Serial.println(ldr_up);
+Serial.print("D");
+Serial.println(ldr_down);
+Serial.print("u - d = ");
+Serial.println(ldr_up - ldr_down);
 */  
+delay(500);
+
 }
 
 
