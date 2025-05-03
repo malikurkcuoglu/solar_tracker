@@ -74,32 +74,32 @@ void loop() {
 
 
 // MOTOR KONTROL
-  if (ldr_left < ldr_right - 75) { 
+  if (ldr_left < ldr_right - 30) { 
     digitalWrite(m1p1, HIGH);
     digitalWrite(m1p2, LOW);
-    delay(1000);
+    delay(300);
     digitalWrite(m1p1, LOW);
     digitalWrite(m1p2, LOW);
-  } else if (ldr_right < ldr_left  - 75) {
+  } else if (ldr_right < ldr_left  - 30) {
     digitalWrite(m1p1, LOW);
     digitalWrite(m1p2, HIGH);
-    delay(1000);
+    delay(300);
     digitalWrite(m1p1, LOW);
     digitalWrite(m1p2, LOW);
   } else {
     digitalWrite(m1p1, LOW);
     digitalWrite(m1p2, LOW);
   }
-  if (ldr_up < ldr_down - 50 && altSwitch) {
+  if (ldr_up < ldr_down - 30 && altSwitch) {
     digitalWrite(m2p1, LOW);
     digitalWrite(m2p2, HIGH);
-    delay(1000);
+    delay(300);
     digitalWrite(m2p1, LOW);
     digitalWrite(m2p2, LOW);
-  }  else if (ldr_down < ldr_up - 50 && ustSwitch) {
+  }  else if (ldr_down < ldr_up - 30 && ustSwitch) {
     digitalWrite(m2p1, HIGH);
     digitalWrite(m2p2, LOW);
-    delay(1000);
+    delay(300);
     digitalWrite(m2p1, LOW);
     digitalWrite(m2p2, LOW);
   }   
@@ -168,7 +168,7 @@ Serial.println(ldr_down);
 Serial.print("u - d = ");
 Serial.println(ldr_up - ldr_down);
 */  
-delay(500);
+delay(1000);
 
 }
 
